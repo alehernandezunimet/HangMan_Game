@@ -82,3 +82,32 @@ class _GameScreenState extends State<GameScreen> {
     _palabraSecreta = mutableWordList.first;
   }
   
+  // Restablece el estado del juego para una nueva partida
+  void _reiniciarJuego() {
+    setState(() {
+      _conteoPartidasSesion++; // Incremento del contador de sesión
+      _seleccionarNuevaPalabra();
+      _letrasAdivinadas = [];
+      _intentosIncorrectos = 0;
+    });
+  }
+
+  // Maneja el intento de una letra
+  void _adivinarLetra(String letra) { 
+    // Evita intentos si el juego terminó.
+    if (_siPerdio() || _siGano()) return;
+
+    setState(() {
+      final letraNormalizada = letra.toUpperCase();
+
+      // Comprobación de letra repetida.
+      if (_letrasAdivinadas.contains(letraNormalizada)) {
+        return;
+      }
+
+      _letrasAdivinadas.add(letraNormalizada);
+
+      // Lógica para intento incorrecto.
+      if (!_palabraSecreta.contains(letraNormalizada)) {
+        _intentosIncorrectos++;
+      }
