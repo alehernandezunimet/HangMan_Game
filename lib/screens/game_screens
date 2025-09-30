@@ -29,14 +29,14 @@ class _GameScreenState extends State<GameScreen> {
   // Lógica de estado final
   // Función: Verifica si el jugador ganó
   bool _siGano() {
-    return !obtenerPalabraOculta().contains("");
+    return !_obtenerPalabraOculta().contains("_");
   }
 
   // Función: Verifica si el jugador perdió
   bool _siPerdio() {
     return _intentosIncorrectos >= maxIntentosIncorrectos;
   }
-
+  
   // Ciclo de vida: Inicializa estado y carga datos
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _GameScreenState extends State<GameScreen> {
     _cargarPuntuaciones(); // Carga de historial de puntuaciones
   }
 
-
+  // --- PERSISTENCIA ---
   // Función: Carga el historial de puntuaciones
   void _cargarPuntuaciones() async {
     _prefs = await SharedPreferences.getInstance();
@@ -71,11 +71,12 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   // LÓGICA DEL JUEGO 
-
+  // Selecciona una palabra aleatoria de la listaPalabras
   void _seleccionarNuevaPalabra() {
     // Creación de una COPIA mutable de la lista para barajar.
     final List<String> mutableWordList = List.from(listaPalabras);
     
+    // Barajar la lista mutable.
     mutableWordList.shuffle(); 
     
     // Asignación de la palabra secreta.
@@ -93,7 +94,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   // Maneja el intento de una letra
-  void _adivinarLetra(String letra) { 
+  void _adivinarLetra(String letra) {
     // Evita intentos si el juego terminó.
     if (_siPerdio() || _siGano()) return;
 
@@ -124,7 +125,7 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
-// Genera la palabra con guiones bajos
+  // Genera la palabra con guiones bajos
   String _obtenerPalabraOculta() {
     String display = "";
     for (int i = 0; i < _palabraSecreta.length; i++) {
@@ -137,6 +138,8 @@ class _GameScreenState extends State<GameScreen> {
     }
     return display.trim();
   }
+
+  // WIDGET VISUAL 
 
   // Muñeco del Ahorcado
   String _obtenerArteAhorcado() {
@@ -220,6 +223,7 @@ class _GameScreenState extends State<GameScreen> {
     final mensajeEstadoJuego = siGano
         ? "¡GANASTE!"
         : siPerdio
+            // Uso de la variable renombrada
             ? "¡PERDISTE! La palabra era: $_palabraSecreta"
             : "";
 
@@ -229,14 +233,14 @@ class _GameScreenState extends State<GameScreen> {
         centerTitle: true,
         backgroundColor: Colors.blueGrey[900],
       ),
-      body: SingleChildScrollView( 
+      body: SingleChildScrollView( // Contenedor desplazable (Responsivo)
         child: Center(
-          child: Column( 
+          child: Column( // Contenedor vertical principal
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               const SizedBox(height: 20),
 
-              // Indicadores de Puntuación 
+              // Indicadores de Puntuación (Extra)
               Text(
                 // Uso de las variables renombradas
                 "Partidas en la sesión: $_conteoPartidasSesion",
@@ -256,7 +260,7 @@ class _GameScreenState extends State<GameScreen> {
                     fontSize: 14,
                     color: Colors.white),
               ),
-              
+
               const SizedBox(height: 20),
               
               // Indicador de Intentos Restantes

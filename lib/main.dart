@@ -4,7 +4,7 @@ import 'package:hangman_game/screens/game_screens';
 
 void main() {
   // Inicialización para plugins como SharedPreferences
-  WidgetsFlutterBinding.ensureInitialized(); 
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const HangmanApp());
 }
 
