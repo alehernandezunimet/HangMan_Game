@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hangman_game/screens/game_screens'; 
-
 
 void main() {
   // Inicialización para plugins como SharedPreferences
