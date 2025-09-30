@@ -111,3 +111,15 @@ class _GameScreenState extends State<GameScreen> {
       if (!_palabraSecreta.contains(letraNormalizada)) {
         _intentosIncorrectos++;
       }
+
+      // Lógica de final de juego.
+      final bool siGano = _siGano();
+      final bool siPerdio = _siPerdio();
+      
+      if (siGano) {
+        _manejarFinDeJuego(true);
+      } else if (siPerdio) {
+        _manejarFinDeJuego(false);
+      }
+    });
+  }
