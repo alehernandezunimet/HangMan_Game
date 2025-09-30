@@ -16,14 +16,14 @@ class HangmanApp extends StatelessWidget {
     return MaterialApp(
       title: "El Ahorcado",
       // Desactivar el banner de "DEBUG"
-      debugShowCheckedModeBanner: false,
-
+      debugShowCheckedModeBanner: false, 
+      
       // Tema oscuro para el contraste
       theme: ThemeData.dark().copyWith(
         primaryColor: Colors.blueGrey,
         scaffoldBackgroundColor: Colors.black,
       ),
-
+      
       // Pantalla Inicial
       home: const GameScreen(),
     );
