@@ -123,7 +123,7 @@ class _GameScreenState extends State<GameScreen> {
       }
     });
   }
-  
+
 // Genera la palabra con guiones bajos
   String _obtenerPalabraOculta() {
     String display = "";
@@ -256,3 +256,51 @@ class _GameScreenState extends State<GameScreen> {
                     fontSize: 14,
                     color: Colors.white),
               ),
+              
+              // Indicador de Intentos Restantes
+              Text(
+                // Uso de variables renombradas
+                "Intentos restantes: ${maxIntentosIncorrectos - _intentosIncorrectos}",
+                style: TextStyle(fontSize: 20, color: (maxIntentosIncorrectos - _intentosIncorrectos) <= 2 ? Colors.redAccent : Colors.yellowAccent),
+              ),
+
+              const SizedBox(height: 30),
+
+              // Palabra Oculta
+              Text(
+                _obtenerPalabraOculta(), // Función renombrada
+                style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 8,
+                    color: Colors.white),
+              ),
+
+              const SizedBox(height: 30),
+                
+              // Bloque Condicional (Mensaje de Fin de Juego)
+              if (siGano || siPerdio) // Condición renombrada
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Column(
+                    children: [
+                      // Mensaje de Ganador/Perdedor
+                      Text(
+                        mensajeEstadoJuego,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: siGano ? Colors.greenAccent : Colors.redAccent,
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      // Botón de Reinicio
+                      ElevatedButton(
+                        onPressed: _reiniciarJuego, // Función renombrada
+                        child: const Text("Jugar de Nuevo", style: TextStyle(fontSize: 18)),
+                      ),
+                    ],
+                  ),
+                )
+                
