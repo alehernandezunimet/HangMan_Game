@@ -137,3 +137,75 @@ class _GameScreenState extends State<GameScreen> {
     }
     return display.trim();
   }
+
+  // Muñeco del Ahorcado
+  String _obtenerArteAhorcado() {
+    const List<String> hangmanSteps = [
+      // 0 fallos
+      """
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========""",
+      // 1 fallo
+      """
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========""",
+      // 2 fallos
+      """
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========""",
+      // 3 fallos
+      """
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========""",
+      // 4 fallos
+      """
+  +---+
+  |   |
+  O   |
+ /|\\  |
+      |
+      |
+=========""",
+      // 5 fallos
+      """
+  +---+
+  |   |
+  O   |
+ /|\\  |
+ /    |
+      |
+=========""",
+      // 6 fallos (Perdió)
+      """
+  +---+
+  |   |
+  O   |
+ /|\\  |
+ / \\  |
+      |
+=========""",
+    ];
+    // Mapeo de fallos al índice del muñeco.
+    final index = _intentosIncorrectos.clamp(0, hangmanSteps.length - 1);
+    return hangmanSteps[index];
+  }
