@@ -277,8 +277,8 @@ class _GameScreenState extends State<GameScreen> {
               ),
 
               const SizedBox(height: 30),
-                
-              // Bloque Condicional (Mensaje de Fin de Juego)
+
+              // Bloque Condicional (Mensaje de Fin de Juego o Teclado)
               if (siGano || siPerdio) // Condición renombrada
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
@@ -303,4 +303,3 @@ class _GameScreenState extends State<GameScreen> {
                     ],
                   ),
                 )
-                
