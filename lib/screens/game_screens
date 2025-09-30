@@ -123,7 +123,7 @@ class _GameScreenState extends State<GameScreen> {
       }
     });
   }
-  
+
 // Genera la palabra con guiones bajos
   String _obtenerPalabraOculta() {
     String display = "";
@@ -256,4 +256,3 @@ class _GameScreenState extends State<GameScreen> {
                     fontSize: 14,
                     color: Colors.white),
               ),
-              
