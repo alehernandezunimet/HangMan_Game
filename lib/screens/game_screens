@@ -36,4 +36,12 @@ class _GameScreenState extends State<GameScreen> {
   bool _siPerdio() {
     return _intentosIncorrectos >= maxIntentosIncorrectos;
   }
-  
+
+  // Ciclo de vida: Inicializa estado y carga datos
+  @override
+  void initState() {
+    super.initState();
+    _seleccionarNuevaPalabra(); // Inicialización de palabra secreta
+    _cargarPuntuaciones(); // Carga de historial de puntuaciones
+  }
+
