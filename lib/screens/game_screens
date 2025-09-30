@@ -257,6 +257,8 @@ class _GameScreenState extends State<GameScreen> {
                     color: Colors.white),
               ),
               
+              const SizedBox(height: 20),
+              
               // Indicador de Intentos Restantes
               Text(
                 // Uso de variables renombradas
@@ -277,8 +279,8 @@ class _GameScreenState extends State<GameScreen> {
               ),
 
               const SizedBox(height: 30),
-                
-              // Bloque Condicional (Mensaje de Fin de Juego)
+
+              // Bloque Condicional (Mensaje de Fin de Juego o Teclado)
               if (siGano || siPerdio) // Condición renombrada
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
@@ -303,4 +305,44 @@ class _GameScreenState extends State<GameScreen> {
                     ],
                   ),
                 )
-                
+              else 
+                // Teclado Funcional (Widget Wrap - Responsivo)
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Wrap(
+                    spacing: 8.0, 
+                    runSpacing: 8.0, 
+                    children: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                        .split("")
+                        .map((letter) {
+                      final bool isGuessed = _letrasAdivinadas.contains(letter); // Variable renombrada
+                      return ElevatedButton(
+                        onPressed: isGuessed ? null : () => _adivinarLetra(letter), // Función renombrada
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(40, 40),
+                          backgroundColor: isGuessed
+                              // Uso de variables renombradas
+                              ? (_palabraSecreta.contains(letter) ? Colors.green[400] : Colors.red[400])
+                              : Colors.blueGrey[700],
+                          foregroundColor: Colors.white,
+                        ),
+                        child: Text(letter, style: const TextStyle(fontSize: 16)),
+                      );
+                    }).toList(),
+                  ),
+                ),
+
+              // Indicador de letras ya usadas
+              Text(
+                "Letras usadas: ${_letrasAdivinadas.join(", ")}", // Variable renombrada
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
