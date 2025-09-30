@@ -1,0 +1,27 @@
+import "package:flutter/material.dart";
+import "package:shared_preferences/shared_preferences.dart";
+import "../constants/constants.dart"; 
+
+// Constante de la lógica
+const int maxIntentosIncorrectos = 6;
+
+// El Widget de la Pantalla del Juego (StatefulWidget)
+class GameScreen extends StatefulWidget {
+  const GameScreen({super.key});
+
+  @override
+  State<GameScreen> createState() => _GameScreenState();
+}
+
+// La Clase de Estado 
+class _GameScreenState extends State<GameScreen> {
+  // Variables de Estado
+  late String _palabraSecreta;
+  List<String> _letrasAdivinadas = [];
+  int _intentosIncorrectos = 0;
+
+  // Variables para la persistencia
+  late SharedPreferences _prefs;
+  int _conteoPartidasSesion = 0;
+  int _totalGanadas = 0;
+  int _totalJugadas = 0;
