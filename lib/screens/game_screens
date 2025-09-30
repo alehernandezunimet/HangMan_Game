@@ -25,3 +25,15 @@ class _GameScreenState extends State<GameScreen> {
   int _conteoPartidasSesion = 0;
   int _totalGanadas = 0;
   int _totalJugadas = 0;
+
+  // Lógica de estado final
+  // Función: Verifica si el jugador ganó
+  bool _siGano() {
+    return !obtenerPalabraOculta().contains("");
+  }
+
+  // Función: Verifica si el jugador perdió
+  bool _siPerdio() {
+    return _intentosIncorrectos >= maxIntentosIncorrectos;
+  }
+  
