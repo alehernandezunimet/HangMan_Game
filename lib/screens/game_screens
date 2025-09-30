@@ -123,3 +123,17 @@ class _GameScreenState extends State<GameScreen> {
       }
     });
   }
+  
+// Genera la palabra con guiones bajos
+  String _obtenerPalabraOculta() {
+    String display = "";
+    for (int i = 0; i < _palabraSecreta.length; i++) {
+      String char = _palabraSecreta[i];
+      if (_letrasAdivinadas.contains(char)) {
+        display += "$char ";
+      } else {
+        display += "_ ";
+      }
+    }
+    return display.trim();
+  }
