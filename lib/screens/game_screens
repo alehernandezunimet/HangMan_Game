@@ -209,3 +209,50 @@ class _GameScreenState extends State<GameScreen> {
     final index = _intentosIncorrectos.clamp(0, hangmanSteps.length - 1);
     return hangmanSteps[index];
   }
+
+
+  // WIDGET BUILD 
+  @override
+  Widget build(BuildContext context) {
+    // Declaración de estado del juego usando las funciones en español
+    final siGano = _siGano();
+    final siPerdio = _siPerdio();
+    final mensajeEstadoJuego = siGano
+        ? "¡GANASTE!"
+        : siPerdio
+            ? "¡PERDISTE! La palabra era: $_palabraSecreta"
+            : "";
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Juego del Ahorcado "),
+        centerTitle: true,
+        backgroundColor: Colors.blueGrey[900],
+      ),
+      body: SingleChildScrollView( 
+        child: Center(
+          child: Column( 
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const SizedBox(height: 20),
+
+              // Indicadores de Puntuación 
+              Text(
+                // Uso de las variables renombradas
+                "Partidas en la sesión: $_conteoPartidasSesion",
+                style: const TextStyle(fontSize: 14, color: Colors.white70),
+              ),
+              Text(
+                "Histórico - Ganadas: $_totalGanadas / Jugadas: $_totalJugadas",
+                style: const TextStyle(fontSize: 14, color: Colors.white70),
+              ),
+              const SizedBox(height: 10),
+              
+              // Muñeco del Ahorcado (Visual)
+              Text(
+                _obtenerArteAhorcado(), // Función renombrada
+                style: const TextStyle(
+                    fontFamily: "monospace",
+                    fontSize: 14,
+                    color: Colors.white),
+              ),
