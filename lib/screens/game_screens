@@ -45,3 +45,27 @@ class _GameScreenState extends State<GameScreen> {
     _cargarPuntuaciones(); // Carga de historial de puntuaciones
   }
 
+
+  // Función: Carga el historial de puntuaciones
+  void _cargarPuntuaciones() async {
+    _prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _totalGanadas = _prefs.getInt("gamesWon") ?? 0;
+      _totalJugadas = _prefs.getInt("gamesPlayed") ?? 0;
+    });
+  }
+
+  // Función: Guarda las puntuaciones actuales
+  void _guardarPuntuaciones() {
+    _prefs.setInt("gamesWon", _totalGanadas);
+    _prefs.setInt("gamesPlayed", _totalJugadas);
+  }
+
+  // Función: Actualiza los contadores al final del juego
+  void _manejarFinDeJuego(bool siGano) {
+    if (siGano) {
+      _totalGanadas++;
+    }
+    _totalJugadas++;
+    _guardarPuntuaciones();
+  }
