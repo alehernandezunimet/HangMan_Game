@@ -69,3 +69,16 @@ class _GameScreenState extends State<GameScreen> {
     _totalJugadas++;
     _guardarPuntuaciones();
   }
+
+  // LÓGICA DEL JUEGO 
+
+  void _seleccionarNuevaPalabra() {
+    // Creación de una COPIA mutable de la lista para barajar.
+    final List<String> mutableWordList = List.from(listaPalabras);
+    
+    mutableWordList.shuffle(); 
+    
+    // Asignación de la palabra secreta.
+    _palabraSecreta = mutableWordList.first;
+  }
+  
